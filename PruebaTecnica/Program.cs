@@ -18,6 +18,8 @@ namespace PruebaTecnica
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<PruebaTecnicaContext>();
+
+            //Program provee de servicios inyectables
             builder.Services.AddScoped<IUserService, UserService>(); 
             builder.Services.AddScoped<IPruebaTecnicaService, PruebaTecnicaService>();
 

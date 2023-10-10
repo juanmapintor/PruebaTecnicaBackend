@@ -20,6 +20,7 @@ namespace PruebaTecnica.DTOs
         public string Gins { get; set; } = null!;
 
         public EstudianteResponse() { }
+        
         public EstudianteResponse(Estudiante estudiante)
         {
             IDEstudiante = estudiante.Idestudiante;

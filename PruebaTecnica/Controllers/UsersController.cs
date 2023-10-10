@@ -12,6 +12,7 @@ namespace PruebaTecnica.Controllers
         public UsersController(IUserService userService) { 
            _userService = userService;
         }
+        
         [HttpPost]
         [Route("Register")]
         public ActionResult<UserResponse> Register(UserRegisterRequest user)

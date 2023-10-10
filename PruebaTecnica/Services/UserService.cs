@@ -30,7 +30,11 @@ namespace PruebaTecnica.Services
 
         public ActionResult<UserResponse> Register(UserRegisterRequest request)
         { 
-            if (request == null || request.Username == String.Empty || request.Password == String.Empty || _context.Users.Where(user => user.Username == request.Username).Any()) return new UnprocessableEntityResult();
+            if (request == null || 
+            request.Username == String.Empty || 
+            request.Password == String.Empty || 
+            _context.Users.Where(user => user.Username == request.Username).Any()) 
+                return new UnprocessableEntityResult();
 
             var newUser = new User()
             {

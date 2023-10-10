@@ -23,6 +23,7 @@ namespace PruebaTecnica.Services
             //Chequeamos que la request esté seteada y el distrito exista
             if (request == null || _context.Distritos.Find(request.IDDistrito) == null) return new UnprocessableEntityResult();
 
+            //Obtenemos el nuevo estudiante desde el DTO y lo guardamos en la base de datos
             var nuevoEstudiante = request.GetEstudiante();
             _context.Estudiantes.Add(nuevoEstudiante);
             _context.SaveChanges();
@@ -39,8 +40,10 @@ namespace PruebaTecnica.Services
                 .ThenInclude(distrito => distrito.Estudiantes)
                 .FirstOrDefault();
 
+            //Si la provincia no existe, informamos que no se pudo procesar la entidad
             if (provinciaSeleccionada == null) return new UnprocessableEntityResult();
 
+            //Generamos la lista de estudiantes
             var estudiantesPorProvincia = provinciaSeleccionada
                 .Distritos
                 .SelectMany(
@@ -66,8 +69,10 @@ namespace PruebaTecnica.Services
                 .ThenInclude(matricula => matricula.Estudiante)
                 .FirstOrDefault();
 
+            //Si el docente no existe, decimos que la entidad no se puede procesar
             if(docenteSeleccionado == null) return new UnprocessableEntityResult();
 
+            //Contamos los estudiantes
             var cantEstudiantes = docenteSeleccionado
                 .Asignaciones
                 .Select(
@@ -83,6 +88,7 @@ namespace PruebaTecnica.Services
                 )
                 .Count();
 
+            //Creamos el DTO de respuesta
             var numeroEstudiantesPorDocente = new NumeroEstudiantesPorDocenteResponse() 
             { 
                 IDDocente = docenteSeleccionado.Iddocente, 

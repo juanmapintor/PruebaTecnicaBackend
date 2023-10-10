@@ -10,6 +10,7 @@ namespace PruebaTecnica.Controllers
     [SimpleAuthorize]
     public class PruebaTecnicaController : ControllerBase
     {
+        //Los servicios provistos por Program son luego consumidos mediante inyeccion de dependencias en Controllers
         private readonly IPruebaTecnicaService _pruebaTecnicaService;
         public PruebaTecnicaController(IPruebaTecnicaService pruebaTecnicaService)
         {
