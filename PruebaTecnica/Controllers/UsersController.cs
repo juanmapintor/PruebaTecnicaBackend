@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PruebaTecnica.DTOs;
-using PruebaTecnica.Entities;
-using PruebaTecnica.Helpers;
-using PruebaTecnica.Repository;
 using PruebaTecnica.Services;
-using PruebaTecnica.SimpleAuthorization;
 
 namespace PruebaTecnica.Controllers
 {
@@ -18,22 +14,9 @@ namespace PruebaTecnica.Controllers
         }
         [HttpPost]
         [Route("Register")]
-        public ActionResult Register(UserRegisterRequest user)
+        public ActionResult<UserResponse> Register(UserRegisterRequest user)
         {
-            if (_userService.Exists(user.Username)) return UnprocessableEntity();
-
-            var newUser = _userService.Register(user.Username, user.Password);
-            if(newUser == null) return UnprocessableEntity();
-
-            return Ok(newUser);
-        }
-
-        [HttpGet]
-        [Route("Test")]
-        [SimpleAuthorize]
-        public ActionResult Test()
-        {
-            return Ok("Has iniciado sesión correctamente");
+            return _userService.Register(user);
         }
     }
 }

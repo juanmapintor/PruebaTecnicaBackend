@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PruebaTecnica.Entities;
+﻿namespace PruebaTecnica.Entities;
 
 public partial class Profesion
 {

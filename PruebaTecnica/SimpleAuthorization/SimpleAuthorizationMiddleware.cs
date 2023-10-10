@@ -1,8 +1,5 @@
-﻿using PruebaTecnica.Helpers;
-using PruebaTecnica.Repository;
-using PruebaTecnica.Services;
+﻿using PruebaTecnica.Services;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace PruebaTecnica.SimpleAuthorization

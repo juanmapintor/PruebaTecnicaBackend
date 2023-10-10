@@ -1,4 +1,6 @@
-﻿using PruebaTecnica.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using PruebaTecnica.DTOs;
+using PruebaTecnica.Entities;
 using PruebaTecnica.Helpers;
 using PruebaTecnica.Repository;
 
@@ -7,8 +9,7 @@ namespace PruebaTecnica.Services
     public interface IUserService
     {
         User? Authenticate(string  username, string password);
-        User? Register(string username, string password);
-        bool Exists(string username);
+        ActionResult<UserResponse> Register(UserRegisterRequest request);
     }
     public class UserService : IUserService
     {
@@ -22,24 +23,20 @@ namespace PruebaTecnica.Services
             return _context.Users.Where(user => user.Username == username && user.Password == SHA256Helper.GetSHA256(password)).FirstOrDefault();
         }
 
-        public User? Register(string username, string password)
-        {
-            if (username == String.Empty || password == String.Empty || Exists(username)) return null;
+        public ActionResult<UserResponse> Register(UserRegisterRequest request)
+        { 
+            if (request == null || request.Username == String.Empty || request.Password == String.Empty || _context.Users.Where(user => user.Username == request.Username).Any()) return new UnprocessableEntityResult();
 
             var newUser = new User()
             {
-                Username = username,
-                Password = SHA256Helper.GetSHA256(password)
+                Username = request.Username,
+                Password = SHA256Helper.GetSHA256(request.Password)
             };
 
             _context.Users.Add(newUser);
             _context.SaveChanges();
 
-            return newUser;
+            return new UserResponse(newUser);
         }
 
-        public bool Exists(string username)
-        {
-            return _context.Users.Where(user => user.Username == username).Any();
-        }
     }}

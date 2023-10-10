@@ -1,4 +1,3 @@
-
 using PruebaTecnica.Repository;
 using PruebaTecnica.Services;
 using PruebaTecnica.SimpleAuthorization;
@@ -20,6 +19,7 @@ namespace PruebaTecnica
 
             builder.Services.AddDbContext<PruebaTecnicaContext>();
             builder.Services.AddScoped<IUserService, UserService>(); 
+            builder.Services.AddScoped<IPruebaTecnicaService, PruebaTecnicaService>();
 
             var app = builder.Build();
 

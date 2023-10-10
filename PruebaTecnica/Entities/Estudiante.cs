@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PruebaTecnica.Entities;
+﻿namespace PruebaTecnica.Entities;
 
 public partial class Estudiante
 {
@@ -22,8 +19,6 @@ public partial class Estudiante
     public string GinsEst { get; set; } = null!;
 
     public int Iddistrito { get; set; }
-
     public virtual Distrito Distrito { get; set; } = null!;
-
     public virtual ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
 }
