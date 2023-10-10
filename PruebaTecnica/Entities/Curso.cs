@@ -13,7 +13,7 @@ public partial class Curso
 
     public int DuraCur { get; set; }
 
-    public virtual ICollection<Asignacion> Asignacions { get; set; } = new List<Asignacion>();
+    public virtual ICollection<Asignacion> Asignaciones { get; set; } = new List<Asignacion>();
 
     public virtual ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
 }

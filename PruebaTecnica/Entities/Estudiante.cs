@@ -23,7 +23,7 @@ public partial class Estudiante
 
     public int Iddistrito { get; set; }
 
-    public virtual Distrito IddistritoNavigation { get; set; } = null!;
+    public virtual Distrito Distrito { get; set; } = null!;
 
     public virtual ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
 }

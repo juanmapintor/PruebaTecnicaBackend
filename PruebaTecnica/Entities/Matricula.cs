@@ -13,7 +13,7 @@ public partial class Matricula
 
     public int Idcurso { get; set; }
 
-    public virtual Curso IdcursoNavigation { get; set; } = null!;
+    public virtual Curso Curso { get; set; } = null!;
 
-    public virtual Estudiante IdestudianteNavigation { get; set; } = null!;
+    public virtual Estudiante Estudiante { get; set; } = null!;
 }

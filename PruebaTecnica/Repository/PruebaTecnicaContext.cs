@@ -49,12 +49,12 @@ public partial class PruebaTecnicaContext : DbContext
             entity.Property(e => e.Idcurso).HasColumnName("idcurso");
             entity.Property(e => e.Iddocente).HasColumnName("iddocente");
 
-            entity.HasOne(d => d.IdcursoNavigation).WithMany(p => p.Asignacions)
+            entity.HasOne(d => d.Curso).WithMany(p => p.Asignaciones)
                 .HasForeignKey(d => d.Idcurso)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__ASIGNACION__CURSO");
 
-            entity.HasOne(d => d.IddocenteNavigation).WithMany(p => p.Asignaciones)
+            entity.HasOne(d => d.Docente).WithMany(p => p.Asignaciones)
                 .HasForeignKey(d => d.Iddocente)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__ASIGNACION__DOCENTE");
@@ -86,7 +86,7 @@ public partial class PruebaTecnicaContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("nomb_dis");
 
-            entity.HasOne(d => d.IdprovinciaNavigation).WithMany(p => p.Distritos)
+            entity.HasOne(d => d.Provincia).WithMany(p => p.Distritos)
                 .HasForeignKey(d => d.Idprovincia)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__DISTRITO__PROVINCIA");
@@ -119,7 +119,7 @@ public partial class PruebaTecnicaContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("ntel_doc");
 
-            entity.HasOne(d => d.IdprofesionNavigation).WithMany(p => p.Docentes)
+            entity.HasOne(d => d.Profesion).WithMany(p => p.Docentes)
                 .HasForeignKey(d => d.Idprofesion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__DOCENTE__PROFESION");
@@ -155,7 +155,7 @@ public partial class PruebaTecnicaContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("tcol_est");
 
-            entity.HasOne(d => d.IddistritoNavigation).WithMany(p => p.Estudiantes)
+            entity.HasOne(d => d.Distrito).WithMany(p => p.Estudiantes)
                 .HasForeignKey(d => d.Iddistrito)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__ESTUDIANTE__DISTRITO");
@@ -174,12 +174,12 @@ public partial class PruebaTecnicaContext : DbContext
             entity.Property(e => e.Idcurso).HasColumnName("idcurso");
             entity.Property(e => e.Idestudiante).HasColumnName("idestudiante");
 
-            entity.HasOne(d => d.IdcursoNavigation).WithMany(p => p.Matriculas)
+            entity.HasOne(d => d.Curso).WithMany(p => p.Matriculas)
                 .HasForeignKey(d => d.Idcurso)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__MATRICULA__CURSO");
 
-            entity.HasOne(d => d.IdestudianteNavigation).WithMany(p => p.Matriculas)
+            entity.HasOne(d => d.Estudiante).WithMany(p => p.Matriculas)
                 .HasForeignKey(d => d.Idestudiante)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__MATRICULA__ESTUDIANTE");

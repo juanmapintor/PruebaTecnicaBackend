@@ -13,7 +13,7 @@ public partial class Asignacion
 
     public int Iddocente { get; set; }
 
-    public virtual Curso IdcursoNavigation { get; set; } = null!;
+    public virtual Curso Curso { get; set; } = null!;
 
-    public virtual Docente IddocenteNavigation { get; set; } = null!;
+    public virtual Docente Docente { get; set; } = null!;
 }

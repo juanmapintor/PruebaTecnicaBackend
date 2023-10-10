@@ -21,7 +21,7 @@ public partial class Docente
 
     public int Idprofesion { get; set; }
 
-    public virtual Profesion IdprofesionNavigation { get; set; } = null!;
+    public virtual Profesion Profesion { get; set; } = null!;
 
     public virtual ICollection<Asignacion> Asignaciones { get; set; } = new List<Asignacion>();
 }

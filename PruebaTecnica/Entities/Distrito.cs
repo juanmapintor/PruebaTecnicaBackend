@@ -11,7 +11,7 @@ public partial class Distrito
 
     public int Idprovincia { get; set; }
 
-    public virtual Provincia IdprovinciaNavigation { get; set; } = null!;
+    public virtual Provincia Provincia { get; set; } = null!;
 
     public virtual ICollection<Estudiante> Estudiantes { get; set; } = new List<Estudiante>();
 }
