@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PruebaTecnica.DTOs;
 using PruebaTecnica.Repository;
 
@@ -31,8 +32,13 @@ namespace PruebaTecnica.Services
 
         public ActionResult<List<EstudianteResponse>> ListEstudiantesPorProvincia(int idProvincia)
         {
-            //Chequeamos que la provincia exista
-            var provinciaSeleccionada = _context.Provincias.Find(idProvincia);
+            //Chequeamos que la provincia exista e incluimos las relaciones que nos importan
+            var provinciaSeleccionada = _context.Provincias
+                .Where(provincia => provincia.Idprovincia == idProvincia)
+                .Include(provincia => provincia.Distritos)
+                .ThenInclude(distrito => distrito.Estudiantes)
+                .FirstOrDefault();
+
             if (provinciaSeleccionada == null) return new UnprocessableEntityResult();
 
             var estudiantesPorProvincia = provinciaSeleccionada
@@ -51,7 +57,15 @@ namespace PruebaTecnica.Services
 
         public ActionResult<NumeroEstudiantesPorDocenteResponse> NumeroEstudiantesPorDocente(int idDocente)
         {
-            var docenteSeleccionado = _context.Docentes.Find(idDocente);
+            //Chequeamos que el docente exista e incluimos las relaciones que nos importan
+            var docenteSeleccionado = _context.Docentes
+                .Where(docente => docente.Iddocente == idDocente)
+                .Include(docente => docente.Asignaciones)
+                .ThenInclude(asignacion => asignacion.Curso)
+                .ThenInclude(curso => curso.Matriculas)
+                .ThenInclude(matricula => matricula.Estudiante)
+                .FirstOrDefault();
+
             if(docenteSeleccionado == null) return new UnprocessableEntityResult();
 
             var cantEstudiantes = docenteSeleccionado
@@ -71,8 +85,9 @@ namespace PruebaTecnica.Services
 
             var numeroEstudiantesPorDocente = new NumeroEstudiantesPorDocenteResponse() 
             { 
-                IDDocente = idDocente, 
-                NombreDocente = docenteSeleccionado.NombDoc, 
+                IDDocente = docenteSeleccionado.Iddocente, 
+                NombreDocente = docenteSeleccionado.NombDoc,
+                ApellidoDocente = docenteSeleccionado.ApelDoc,
                 CantidadEstudiantes = cantEstudiantes 
             };
 
