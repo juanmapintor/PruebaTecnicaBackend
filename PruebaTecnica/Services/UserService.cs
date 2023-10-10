@@ -20,7 +20,12 @@ namespace PruebaTecnica.Services
         }
         public User? Authenticate(string username, string password)
         {
-            return _context.Users.Where(user => user.Username == username && user.Password == SHA256Helper.GetSHA256(password)).FirstOrDefault();
+            return _context.Users
+                .Where(
+                user => 
+                    user.Username == username && 
+                    user.Password == SHA256Helper.GetSHA256(password)
+                ).FirstOrDefault();
         }
 
         public ActionResult<UserResponse> Register(UserRegisterRequest request)
