@@ -1,5 +1,7 @@
 
 using PruebaTecnica.Repository;
+using PruebaTecnica.Services;
+using PruebaTecnica.SimpleAuthorization;
 
 namespace PruebaTecnica
 {
@@ -17,6 +19,7 @@ namespace PruebaTecnica
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<PruebaTecnicaContext>();
+            builder.Services.AddScoped<IUserService, UserService>(); 
 
             var app = builder.Build();
 
@@ -31,6 +34,7 @@ namespace PruebaTecnica
 
             app.UseAuthorization();
 
+            app.UseMiddleware<SimpleAuthorizationMiddleware>();
 
             app.MapControllers();
 
