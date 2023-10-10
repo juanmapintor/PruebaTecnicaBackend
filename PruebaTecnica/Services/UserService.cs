@@ -42,5 +42,4 @@ namespace PruebaTecnica.Services
         {
             return _context.Users.Where(user => user.Username == username).Any();
         }
-    }
-}
+    }}
